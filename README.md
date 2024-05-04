@@ -60,6 +60,8 @@
 
    - github url:
      https://github.com/chrysek70/test-repo
+   - downlad of VirtualBox VM:
+     http://www.wianecki.com/AlmaLinuxVM.zip
 
 ######## end ########
 
