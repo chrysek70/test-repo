@@ -63,4 +63,4 @@
 
 ######## end ########
 
-    
+NOTE: linux passworsd is set to krzysiek, linux user is cw and its password is also set to krzysiek
