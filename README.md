@@ -64,3 +64,75 @@
 ######## end ########
 
 NOTE: linux passworsd is set to krzysiek, linux user is cw and its password is also set to krzysiek
+
+results:
+when running curl against haproxy which is set to round-robin we gett the following results
+```
+[cw@localhost ~]$ curl http://localhost
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Container</title>
+</head>
+<body>
+    <h1>Host: 8205b27aa738</h1>
+    <p>Ansible is awesome!</p>
+</body>
+</html>
+
+[cw@localhost ~]$ curl http://localhost
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Container</title>
+</head>
+<body>
+    <h1>Host: c09ee86153cd</h1>
+    <p>Ansible is awesome!</p>
+</body>
+</html>
+
+[cw@localhost ~]$
+```
+
+when connecting to individual servers we gett he following
+
+```
+[cw@localhost ~]$ curl http://127.0.0.1:8081
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Container</title>
+</head>
+<body>
+    <h1>Host: 8205b27aa738</h1>
+    <p>Ansible is awesome!</p>
+</body>
+</html>
+
+[cw@localhost ~]$
+```
+and
+```
+[cw@localhost ~]$ curl http://127.0.0.1:8082
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Container</title>
+</head>
+<body>
+    <h1>Host: c09ee86153cd</h1>
+    <p>Ansible is awesome!</p>
+</body>
+</html>
+
+[cw@localhost ~]$
+```
