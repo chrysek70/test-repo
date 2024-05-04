@@ -68,23 +68,73 @@
 NOTE: linux passworsd is set to krzysiek, linux user is cw and its password is also set to krzysiek
 
 results:
+
+my playbook run
+```
+[cw@localhost ansible-automation]$ ansible-playbook -i inventory/hosts playbooks/site.yml --ask-vault-pass
+Vault password:
+
+PLAY [webserver] *******************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************
+ok: [localhost]
+
+TASK [../roles/user_setup : Create Groups] *****************************************************************************
+ok: [localhost] => (item={'name': 'bmgroup', 'gid': '1100'})
+ok: [localhost] => (item={'name': 'batchgroup', 'gid': '1108'})
+ok: [localhost] => (item={'name': 'dockerappgroup', 'gid': '10000'})
+
+TASK [../roles/user_setup : Create Users] ******************************************************************************
+changed: [localhost] => (item={'name': 'bmadmin', 'uid': '1100', 'group': 'bmgroup', 'shell': '/bin/bash', 'password': '$6$rounds=656000$gteyS6FsNFAFbc2z$mSRaogikiKag1GJhtx8quhsifXPk4gh5Os1x7BVMAUjmmBip0.Vt2qKYRTr5vpEjZlbpCnl.HMX94izLwx1oj0'})
+ok: [localhost] => (item={'name': 'batch', 'uid': '1108', 'group': 'batchgroup', 'shell': '/bin/bash'})
+ok: [localhost] => (item={'name': 'dockerapp', 'uid': '10000', 'group': 'dockerappgroup', 'shell': '/bin/bash'})
+
+TASK [../roles/user_setup : Grant sudo access to bmadmin] **************************************************************
+ok: [localhost]
+
+TASK [../roles/docker_setup : Install Docker dependencies] *************************************************************
+ok: [localhost]
+
+TASK [../roles/docker_setup : Set up Docker repository] ****************************************************************
+ok: [localhost]
+
+TASK [../roles/docker_setup : Install Docker] **************************************************************************
+ok: [localhost]
+
+TASK [../roles/docker_setup : Start and enable Docker service] *********************************************************
+ok: [localhost]
+
+TASK [../roles/haproxy_setup : Install HAProxy] ************************************************************************
+ok: [localhost]
+
+TASK [../roles/haproxy_setup : Deploy HAProxy configuration] ***********************************************************
+ok: [localhost]
+
+TASK [../roles/haproxy_setup : Enable and start HAProxy service] *******************************************************
+ok: [localhost]
+
+TASK [../roles/apache_setup : Deploy Apache containers] ****************************************************************
+ok: [localhost] => (item=1)
+ok: [localhost] => (item=2)
+
+TASK [../roles/apache_setup : Ensure directory exists on host] *********************************************************
+ok: [localhost] => (item=1)
+ok: [localhost] => (item=2)
+
+TASK [../roles/apache_setup : Copy custom PHP page to host directories] ************************************************
+ok: [localhost] => (item=1)
+ok: [localhost] => (item=2)
+
+PLAY RECAP *************************************************************************************************************
+localhost                  : ok=14   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[cw@localhost ansible-automation]$
+```
+
+
 when running curl against haproxy which is set to round-robin we gett the following results
 ```
-[cw@localhost ~]$ curl http://localhost
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apache Container</title>
-</head>
-<body>
-    <h1>Host: 8205b27aa738</h1>
-    <p>Ansible is awesome!</p>
-</body>
-</html>
-
-[cw@localhost ~]$ curl http://localhost
+[cw@localhost ansible-automation]$ curl http://127.0.0.1
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +148,33 @@ when running curl against haproxy which is set to round-robin we gett the follow
 </body>
 </html>
 
-[cw@localhost ~]$
+[cw@localhost ansible-automation]$ curl http://127.0.0.1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Container</title>
+</head>
+<body>
+    <h1>Host: 8205b27aa738</h1>
+    <p>Ansible is awesome!</p>
+</body>
+</html>
+
+[cw@localhost ansible-automation]$ curl http://127.0.0.1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Container</title>
+</head>
+<body>
+    <h1>Host: c09ee86153cd</h1>
+    <p>Ansible is awesome!</p>
+</body>
+</html>
 ```
 
 when connecting to individual servers we gett he following
