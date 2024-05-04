@@ -1,0 +1,22 @@
+- name: Deploy Apache containers
+  docker_container:
+    name: "apache{{ item }}"
+    image: httpd
+    state: started
+    published_ports: "{{ 8080 + item }}:80"
+  loop:
+    - 1
+    - 2
+  become: yes
+
+- name: Copy custom HTML page to containers
+  template:
+    src: index.html.j2
+    dest: "/usr/local/apache2/htdocs/index.html"
+  loop_control:
+    loop_var: item
+  with_items:
+    - apache1
+    - apache2
+  become: yes
+

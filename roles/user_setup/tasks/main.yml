@@ -1,0 +1,23 @@
+- name: Create Users
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    group: "{{ item.group }}"
+    shell: "{{ item.shell }}"
+    password: "{{ item.password | default(omit) }}"
+    createhome: yes
+  with_items:
+    - { name: 'bmadmin', uid: '1100', group: '1100', shell: '/bin/bash', password: "{{ 'tEsts3cr3t!' | password_hash('sha512') }}" }
+    - { name: 'batch', uid: '1108', group: '1108', shell: '/bin/bash' }
+    - { name: 'dockerapp', uid: '10000', group: '10000', shell: '/bin/bash' }
+  become: yes
+
+- name: Grant sudo access to bmadmin
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^bmadmin'
+    line: 'bmadmin ALL=(ALL) NOPASSWD:ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+  become: yes
+

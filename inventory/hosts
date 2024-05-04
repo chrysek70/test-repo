@@ -1,0 +1,4 @@
+# ansible-automation/inventory/hosts
+[webserver]
+localhost ansible_connection=local
+
