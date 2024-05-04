@@ -4,6 +4,7 @@
     name: "apache{{ item }}"
     image: "php:7.4-apache"  # Using a PHP-capable image
     state: started
+    restart_policy: always  # Ensures the container restarts automatically
     published_ports: "{{ 8080 + item }}:80"
     volumes:
       - "/var/www/apache{{ item }}:/var/www/html"  # Adjusted the mount path
