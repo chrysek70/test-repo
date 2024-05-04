@@ -31,7 +31,7 @@
 
    - When VirtualBox is booting off installation ISO, press TAB and add to the
      ```
-     inst.ks=http://<server-ip>:8000/ks.cfg
+     inst.ks=http://<server-ip>:8000/my.ks
      ```
      Note: `server-ip` is the IP of where Python web server is running off, in my case, it was my PC IP address.
 
