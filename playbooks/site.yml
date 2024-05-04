@@ -1,8 +1,8 @@
 - hosts: webserver
   become: true
   roles:
-    - user_setup
-    - docker_setup
-    - haproxy_setup
-    - apache_setup
+    - ../roles/user_setup
+    - ../roles/docker_setup
+    - ../roles/haproxy_setup
+    - ../roles/apache_setup
 

@@ -12,3 +12,10 @@
     - restart haproxy
   become: yes
 
+- name: Enable and start HAProxy service
+  systemd:
+    name: haproxy
+    enabled: yes
+    state: started
+  become: yes
+

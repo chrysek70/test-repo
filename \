@@ -25,6 +25,7 @@
 - name: Copy custom PHP page to host directories
   ansible.builtin.template:
     src: "{{ role_path }}/templates/index.php.j2"
+    #src: "{{ role_path }}/templates/index.html.j2"
     dest: "/var/www/apache{{ item }}/index.php"  # Ensure the file name reflects .php extension
   loop:
     - 1

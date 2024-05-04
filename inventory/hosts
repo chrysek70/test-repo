@@ -1,4 +1,9 @@
-# ansible-automation/inventory/hosts
 [webserver]
 localhost ansible_connection=local
+
+[webserver:vars]
+ansible_become=yes
+ansible_become_method=sudo
+ansible_become_user=root
+ansible_become_pass=krzysiek
 

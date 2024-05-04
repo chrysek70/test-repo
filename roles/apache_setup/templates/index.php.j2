@@ -6,7 +6,7 @@
     <title>Apache Container</title>
 </head>
 <body>
-    <h1>Host: {{ ansible_hostname }}</h1>
+    <h1>Host: <?php echo gethostname(); ?></h1>
     <p>Ansible is awesome!</p>
 </body>
 </html>
