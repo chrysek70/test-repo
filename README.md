@@ -136,3 +136,20 @@ and
 
 [cw@localhost ~]$
 ```
+
+index pages that are used by docker containers are in the following locations for each container, they can be modified withour rebuilding docker containers:
+```
+[cw@localhost ~]$ ls -la /var/www/apache1/
+total 8
+drwxr-xr-x. 2 root root  41 May  4 14:28 .
+drwxr-xr-x. 4 root root  36 May  4 13:30 ..
+-rw-r--r--. 1 root root 270 May  4 13:30 index.html
+-rw-r--r--. 1 root root 289 May  4 14:28 index.php
+[cw@localhost ~]$ ls -la /var/www/apache2/
+total 8
+drwxr-xr-x. 2 root root  41 May  4 14:28 .
+drwxr-xr-x. 4 root root  36 May  4 13:30 ..
+-rw-r--r--. 1 root root 270 May  4 13:30 index.html
+-rw-r--r--. 1 root root 289 May  4 14:28 index.php
+[cw@localhost ~]$
+```
