@@ -221,19 +221,17 @@ index pages that are used by docker containers are in the following locations fo
 total 8
 drwxr-xr-x. 2 root root  41 May  4 14:28 .
 drwxr-xr-x. 4 root root  36 May  4 13:30 ..
--rw-r--r--. 1 root root 270 May  4 13:30 index.html
 -rw-r--r--. 1 root root 289 May  4 14:28 index.php
 [cw@localhost ~]$ ls -la /var/www/apache2/
 total 8
 drwxr-xr-x. 2 root root  41 May  4 14:28 .
 drwxr-xr-x. 4 root root  36 May  4 13:30 ..
--rw-r--r--. 1 root root 270 May  4 13:30 index.html
 -rw-r--r--. 1 root root 289 May  4 14:28 index.php
 [cw@localhost ~]$
 ```
 
 Final thoughts:
-- I rarely used virtual box, so I did run into quite a few PC crashes when I changed from NAT ro Bridge interface, it took me a bit to figure this out why it was crashing my PC, so I did set port forwarding of my SSH port 22 to 2222 so I could ssh to that VM. Then I used curl and lynx to test my pages.
+-  Since I rarely use virtual box I had a couple PC crashes when I changed from NAT to Bridge interface. I figured out that by setting port forwarding of my SSH port from 22 to 2222 I could connect to that VM. Then I used curl and lynx to test my pages.
 - This project introduced me to AlmaLinux, a distribution I hadn’t worked with before. Opting for it over RockyLinux was a spontaneous decision, driven by the opportunity to explore something new. While they share similarities, delving into AlmaLinux offered a fresh learning curve.
 - I also did decide to automate as much as I could, so I was able to figure out how to create vm in virtual box using powershell commands, this gave me ability to set exact specs for the vm as described in the taks, I also did setup kickstart file which also gave me ability top set my linux partitions and everything else to exact specifiactions that were given in your test. Unfortunatelly I did not have pxeboot so during iso boot I had to append inst.ks=http://<server-ip>:8000/my.ks to end of command line, this coul dbe avoided I think with pxeboot setup.
 - I also did run into issues with SELinux was enforcing so I had to disable it:
