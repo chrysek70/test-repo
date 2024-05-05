@@ -232,8 +232,9 @@ drwxr-xr-x. 4 root root  36 May  4 13:30 ..
 
 Final thoughts:
 -  Since I rarely use virtual box I had a couple PC crashes when I changed from NAT to Bridge interface. I figured out that by setting port forwarding of my SSH port from 22 to 2222 I could connect to that VM. Then I used curl and lynx to test my pages.
-- This project introduced me to AlmaLinux, a distribution I hadn’t worked with before. Opting for it over RockyLinux was a spontaneous decision, driven by the opportunity to explore something new. While they share similarities, delving into AlmaLinux offered a fresh learning curve.
-- I also did decide to automate as much as I could, so I was able to figure out how to create vm in virtual box using powershell commands, this gave me ability to set exact specs for the vm as described in the taks, I also did setup kickstart file which also gave me ability top set my linux partitions and everything else to exact specifiactions that were given in your test. Unfortunatelly I did not have pxeboot so during iso boot I had to append inst.ks=http://<server-ip>:8000/my.ks to end of command line, this coul dbe avoided I think with pxeboot setup.
-- I also did run into issues with SELinux was enforcing so I had to disable it:
-  - sudo setenforce 0
-- 
+- This project introduced me to AlmaLinux, a distribution I had not worked with before. Opting for it over RockyLinux was a spontaneous decision, driven by the opportunity to explore something new. While they share similarities, delving into AlmaLinux offered a fresh learning experience.
+- I automated as much as possible and was able to figure out how to create vm in virtual box using powershell commands. This gave me the ability to set exact specs for the vm as described in the tasks. I also did setup kickstart file which allowed me to set my linux partitions and packages to exact specifications given in a test. I do not have pxeboot so during iso boot I had to append inst.ks=http://<server-ip>:8000/my.ks to end of command line. I beleive this could be avoided I think with pxeboot setup.
+- I also did run into issues with SELinux was enforcing and I had to disable it:
+    ```
+    sudo setenforce 0
+    ```
