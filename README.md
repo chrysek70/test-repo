@@ -60,12 +60,12 @@
 
    - github url:
      https://github.com/chrysek70/test-repo
-   - downlad of VirtualBox VM:
+   - download of VirtualBox VM:
      http://www.wianecki.com/AlmaLinuxVM.zip
 
 ######## end ########
 
-NOTE: linux passworsd is set to krzysiek, linux user is cw and its password is also set to krzysiek
+NOTE: linux password is set to krzysiek, linux user is cw and its password is also set to krzysiek
 
 results:
 
@@ -132,7 +132,7 @@ localhost                  : ok=14   changed=1    unreachable=0    failed=0    s
 ```
 
 
-when running curl against haproxy which is set to round-robin we gett the following results
+when running curl against haproxy which is set to round-robin we get the following results:
 ```
 [cw@localhost ansible-automation]$ curl http://127.0.0.1
 <!DOCTYPE html>
@@ -177,7 +177,7 @@ when running curl against haproxy which is set to round-robin we gett the follow
 </html>
 ```
 
-when connecting to individual servers we gett he following
+when connecting to individual servers we get the following:
 
 ```
 [cw@localhost ~]$ curl http://127.0.0.1:8081
@@ -215,7 +215,7 @@ and
 [cw@localhost ~]$
 ```
 
-index pages that are used by docker containers are in the following locations for each container, they can be modified withour rebuilding docker containers:
+index pages that are used by docker containers are in the following locations for each container, they can be modified without rebuilding docker containers:
 ```
 [cw@localhost ~]$ ls -la /var/www/apache1/
 total 8
@@ -231,7 +231,7 @@ drwxr-xr-x. 4 root root  36 May  4 13:30 ..
 ```
 
 Final thoughts:
--  Since I rarely use virtual box I had a couple PC crashes when I changed from NAT to Bridge interface. I figured out that by setting port forwarding of my SSH port from 22 to 2222 I could connect to that VM. Then I used curl and lynx to test my pages.
+-  Since I rarely use virtual box, I had a couple PC crashes when I changed from NAT to Bridge interface. I figured out that by setting port forwarding of my SSH port from 22 to 2222 I could connect to that VM. Then I used curl and lynx to test my pages.
 - This project introduced me to AlmaLinux, a distribution I had not worked with before. Opting for it over RockyLinux was a spontaneous decision, driven by the opportunity to explore something new. While they share similarities, delving into AlmaLinux offered a fresh learning experience.
 - I automated as much as possible and was able to figure out how to create vm in virtual box using powershell commands. This gave me the ability to set exact specs for the vm as described in the tasks. I created kickstart file which allowed me to set my linux partitions and packages to exact specifications given in the test. I do not have pxeboot so during iso boot I had to append inst.ks=http://<server-ip>:8000/my.ks to end of command line. I think this could be avoided with pxeboot setup.
 - Lastly SELinux was enforcing which created some issues with port blocking so I had to disable it:
